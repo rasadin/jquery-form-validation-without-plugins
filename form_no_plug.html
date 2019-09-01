@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Makes "field" required and digits only.</title>
+<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+ <style>
+ #docs {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+ </style>
+ 
+</head>
+<body>
+<form action="" method="post" class="a">
+    Name : 
+	<input type="text" class="text" name="name" id="name" /> <br/>
+    Address : 
+	<input type="text" class="text" name="address" id="address" /> <br/>
+    email : 
+	<input type="text" class="text" name="email" id="email" /> <br/>
+	
+	Phone ex: (415)555-2671:
+    <input type="text" name="phone_number" id="phone_number" placeholder="Phone*" /> <br/>
+  
+    Age 18 to 126:
+    <input type="text" name="age" id="age" placeholder="Age*" /> <br/>
+
+    Gender:
+	<input type="radio" name="gender" id="gender" value="m" /> MALE
+	<input type="radio" name="gender" id="gender" value="f"/>FEMALE
+	<input type="radio" name="gender" id="gender" value="o"/>OTHERS <br/>
+	
+     Nationality-Bangladeshi(yes/no):
+	<input type="checkbox" name="bangladeshi" id="bangladeshi" value="y" /> Yes
+	<input type="checkbox" name="bangladeshi" id="bangladeshi" value="n"/>No <br/>
+	
+    City: 
+	  <select name='item'  id="item" size='1'>
+	  <option value=''>Select ...</option>
+	  <option value='Avocado'>Avocado</option>
+	  <option value='Bell Pepper'>Bell Pepper</option> 
+	  <option value='Bitter Melon'>Bitter Melon</option> 
+	  <option value='Chayote'>Chayote</option>
+	  <option value='Cucumber'>Cucumber</option>
+	  <option value='Ivy'>Ivy</option> Gourd
+	  <option value='Aubergine'>Aubergine</option>
+	  <option value='Olive'>Olive</option> fruit
+	  <option value='Luffa'>Luffa</option>
+	  </select><br/>
+	  <br>
+	
+	
+    <input type="button" id="submit" value="Submit" name="submit" />
+</form>
+
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script>
+$('#submit').on('click', function() {
+    valid = true;   
+
+    if (valid && $('#name').val() == '') {
+        alert ("please enter your name");
+        valid = false;
+    }
+	
+	 if (valid && $('#name').val().length > 10) {
+        alert ("please enter your name and lenth must be <10");
+        valid = false;
+    }
+	    if (valid && $('#email').val() == '') {
+        alert ("please enter your email");
+        valid = false;
+    }
+	
+		if (valid && $('#email').val().length>30) {
+        alert ("need email size <30");
+        valid = false;
+    }
+	
+		if (valid && !$('#email').val().match(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/)) {
+        alert ("need perfect email format");
+        valid = false;
+    }
+	
+
+        if (valid && $('#address').val() == '') {
+        alert ("please enter your address");
+         valid = false;
+    }    
+	
+	
+		if (valid && $('#address').val().length>300) {
+        alert ("need address size <300");
+        valid = false;
+    }
+	     
+		 if (valid && $('#phone_number').val() == '') {
+        alert ("please enter your phone_number");
+         valid = false;
+    }   
+	
+		if (valid && $('#phone_number').val().length>15) {
+        alert ("need phone size <16");
+        valid = false;
+    }
+	
+		if (valid && !$('#phone_number').val().match(/^(\+?1-?)?(\([2-9]\d{2}\)|[2-9]\d{2})-?[2-9]\d{2}-?\d{4}$/)) {
+        alert ("need correct format ex: (415)555-2671");
+        valid = false;
+    }
+	
+	     if (valid && $('#age').val() == '') {
+        alert ("please enter your age");
+         valid = false;
+    }   
+	
+		if (valid && ($('#age').val().length<17 && $('#age').val().length>127)) {
+        alert ("age must be between 18 to 126");
+        valid = false;
+    }
+	
+		if (valid && !$('#age').val().match(/^[]?\d+$/)) {
+        alert ("need only number");
+        valid = false;
+    }
+	
+		if (valid && $('input[type=radio][name=gender]:checked').length<1) {
+        alert ("select your gender");
+        valid = false;
+    }
+	
+		if (valid && $('input[type=checkbox][name=bangladeshi]:checked').length>1) {
+        alert ("select only yes or no for nationality");
+        valid = false;
+    }
+	
+	    if (valid && $('input[type=checkbox][name=bangladeshi]:checked').length==0) {
+        alert ("select your nationality");
+        valid = false;
+    }
+	
+	    if (valid && ($('#item').val().length == 0 || $('#item').val() == "") ){
+        alert ("select your city must");
+        valid = false;
+    }
+	
+	
+	
+    return valid;
+});
+</script>
+</body>
+</html>
